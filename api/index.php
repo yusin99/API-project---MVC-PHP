@@ -36,10 +36,24 @@ try {
     if ($_GET['action']) {
         $url = explode('/', filter_var($_GET['action'], FILTER_SANITIZE_URL));
         switch ($url[0]) {
-            case 'france':
-                $controller = new API();
-                echo $controller->loadVilles();
+            case 'ville':
+                if (!empty($url[1])) {
+                    if (!empty($url[2]) && strtolower($url[2]) === 'update') {
+                        $controller = new API();
+                        $controller->loadTown($url[1]);
+                        if (!empty($url[3])) {
+                            $controller = new API();
+                            $controller->update_ville($url[3]);
+                        }
+                    } else {
+                        $controller = new API();
+                        echo $controller->loadTown($url[1]);
+                    }
+                } else {
+                    throw new Exception('Please indicate below your postal code or /update!');
+                }
                 break;
+
             case 'villes':
                 if (!empty($url[1])) {
 
@@ -52,50 +66,35 @@ try {
                     }
                 } else {
                     $controller = new API();
-                    echo $controller->loadVilles();
+                    echo $controller->loadTowns();
                 }
                 break;
-            case 'ville':
-                if (!empty($url[1])) {
-                    if (!empty($url[2]) && strtolower($url[2]) === 'update') {
-                        $controller = new API();
-                        $controller->loadVille($url[1]);
-                        if (!empty($url[3])) {
-                            $controller = new API();
-                            $controller->UpdateVille($url[3]);
-                        }
-                    } else {
-                        $controller = new API();
-                        echo $controller->loadVille($url[1]);
-                    }
-                } else {
-                    throw new Exception('Veuillez indiquer un Code Postal');
-                }
-                break;
-            case 'population':
-                if (!empty($url[1])) {
-                    $controller = new API();
-                    echo $controller->loadPopulation($url[1]);
-                } else {
-                    throw new Exception('Veuillez indiquer un Code Postal');
-                }
-                break;
+
             case 'superficie':
                 if (!empty($url[1])) {
                     $controller = new API();
-                    echo $controller->loadSuperficie($url[1]);
+                    echo $controller->loadSurface($url[1]);
                 } else {
-                    throw new Exception('Veuillez indiquer un Code Postal');
+                    throw new Exception('Please indicate below your postal code or /update!');
                 }
                 break;
+
+            case 'population':
+                if (!empty($url[1])) {
+                        $controller = new API();
+                        echo $controller->loadPopulation($url[1]);
+                } else {
+                        throw new Exception('Please indicate below your postal code or /update!');
+                }
+                    break;
         }
     } else {
-        echo 'Veuillez faire la bonne commande';
+        echo 'Wrong data. Please enter the correct data!';
     }
 } catch (Exception $e) {
-    $erreur = [
-        "message" => $e->getMessage(),
+    $error = [
         'code' => $e->getCode(),
+        "message" => $e->getMessage(),
     ];
-    print_r($erreur);
+    print_r($error);
 }

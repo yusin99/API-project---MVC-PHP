@@ -93,19 +93,24 @@ try
                 break;
 
             // route "/allusers", qui utilise le modèle et la base de données
-            case "allvilles":
+            case "alltowns":
                 // à noter qu'ici on a fait le choix d'utiliser un autre controller
                 $controller = new VillesController();
-                $controller->display_all_villes();
+                $controller->display_all_towns();
                 break;
-            case "villes":
+            case "towns":
                 $code_departement = $url[1];
                 if (isset($url[2])) {
                     $canton = $url[2];
                     $controller = new VillesController();
-                    $controller->display_ville_canton($code_departement, $canton);
+                    $controller->display_town_canton($code_departement, $canton);
                     break;
                 }
+            case "superficie":
+                    $code_postal = $url[1];
+                    $controller = new VillesController();
+                    $controller->display_surface($code_postal);
+                    break;
             case "ville":
             case "town":
                 if (empty($url[2])) {
@@ -123,11 +128,7 @@ try
                 $controller = new VillesController();
                 $controller->display_population($code_postal);
                 break;
-            case "superficie":
-                $code_postal = $url[1];
-                $controller = new VillesController();
-                $controller->display_superficie($code_postal);
-                break;
+            
             default:
                 throw new Exception("La page n'existe pas");
         }

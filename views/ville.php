@@ -30,16 +30,16 @@
                         </thead>
                         <tbody>
                             <?php
-// $users est défini dans le controlleur, on peut l'utiliser dans la vue
-foreach ($villes as $ville) {?>
+
+foreach ($town as $town) {?>
                             <tr>
-                                <td><?=$ville->departement?></td>
-                                <td><?=$ville->nom?></td>
-                                <td><?=$ville->code_postal?></td>
-                                <td><?=$ville->canton?></td>
-                                <td><?=$ville->population?></td>
-                                <td><?=$ville->densite?></td>
-                                <td><?=$ville->surface?></td>
+                                <td><?=$town->departement?></td>
+                                <td><?=$town->nom?></td>
+                                <td><?=$town->code_postal?></td>
+                                <td><?=$town->canton?></td>
+                                <td><?=$town->population?></td>
+                                <td><?=$town->densite?></td>
+                                <td><?=$town->surface?></td>
                             </tr>
                             <?php }?>
                         </tbody>

@@ -9,48 +9,38 @@ class VillesController
     public function __construct()
     {
         $this->villesManager = new villesManager();
-        // on demande au manager de charger tous les utilisateurs depuis la base de données
-        $this->villesManager->loadAllVilles();
+        $this->villesManager->loadAllTowns();
     }
-
-    /** fontion appelée par la route /allusers */
-    public function display_all_villes()
+    public function display_all_towns()
     {
-        // on récupère le tableau des utilisateurs dans une variable $users
-        $ville = $this->villesManager->loadAllVilles();
-        // et on charge la vue qui utilisera $users
+        $town = $this->villesManager->loadAllTowns();
         require_once "views/villes.php";
     }
 
     public function display_town($code_postal)
     {
-        $villes = $this->villesManager->loadVille($code_postal);
+        $town = $this->villesManager->loadTown($code_postal);
         require_once "views/ville.php";
     }
     public function display_population($code_postal)
     {
 
-        $ville = $this->villesManager->loadPopulation($code_postal);
-
+        $town = $this->villesManager->loadPopulation($code_postal);
         require_once "views/population.php";
     }
-    public function display_superficie($code_postal)
+    public function display_surface($code_postal)
     {
-
-        $ville = $this->villesManager->loadSuperficie($code_postal);
-
+        $town = $this->villesManager->loadSurface($code_postal);
         require_once "views/superficie.php";
     }
-    public function display_ville_canton($code_departement, $canton)
+    public function display_town_canton($code_departement, $canton)
     {
-        $ville = $this->villesManager->loadDepCanton($code_departement, $canton);
-
+        $town = $this->villesManager->loadDepCanton($code_departement, $canton);
         require_once "views/canton.php";
     }
     public function update_town($code_postal)
     {
-        $villesU = $this->villesManager->loadUVille($code_postal);
-
+        $town_update = $this->villesManager->load_updated_town($code_postal);
         require_once "views/update.php";
     }
 }

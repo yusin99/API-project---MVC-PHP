@@ -30,20 +30,17 @@
                         </thead>
                         <tbody>
                             <?php
-                        // $users est défini dans le controlleur, on peut l'utiliser dans la vue
-                        // print_r($villes);
-                        foreach ($ville as $ville)
-                        //    echo $ville->surface;
+                        foreach ($town as $town)
                         { ?>
-                            <p>La superficie de <?=$ville->nom ?> est de <?=$ville->surface ?></p>
+                            <p>La superficie de <?=$town->nom ?> est de <?=$town->surface ?></p>
                             <tr>
-                                <td><?= $ville->departement?></td>
-                                <td><?= $ville->nom ?></td>
-                                <td><?= $ville->code_postal ?></td>
-                                <td><?= $ville->canton ?></td>
-                                <td><?= $ville->population ?></td>
-                                <td><?= $ville->densite ?></td>
-                                <td><?= $ville->surface ?></td>
+                                <td><?= $town->departement?></td>
+                                <td><?= $town->nom ?></td>
+                                <td><?= $town->code_postal ?></td>
+                                <td><?= $town->canton ?></td>
+                                <td><?= $town->population ?></td>
+                                <td><?= $town->densite ?></td>
+                                <td><?= $town->surface ?></td>
                             </tr>
                             <?php } ?>
                         </tbody>

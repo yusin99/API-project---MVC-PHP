@@ -3,8 +3,7 @@ require_once '../models/DB.class.php';
 
 class API extends DB
 {
-
-    public function loadVilles()
+    public function loadTowns()
     {
         $req = $this->getDatabase()->prepare("SELECT * FROM villes_france ORDER BY code_postal");
         $req->execute();
@@ -13,7 +12,7 @@ class API extends DB
         return json_encode($villes, JSON_UNESCAPED_UNICODE);
 
     }
-    // Charge  les villes d'un département
+
     public function loadDepartement($zip)
     {
         $req = $this->getDatabase()->prepare("SELECT * FROM villes_france WHERE departement = ? ORDER BY code_postal");
@@ -22,8 +21,8 @@ class API extends DB
         $req->closeCursor();
         return json_encode($villes, JSON_UNESCAPED_UNICODE);
     }
-    // Charge une ville selon zip
-    public function loadVille($zip)
+
+    public function loadTown($zip)
     {
         $req = $this->getDatabase()->prepare("SELECT * FROM villes_france WHERE code_postal LIKE ?");
         $req->execute(array($zip . "%"));
@@ -41,7 +40,7 @@ class API extends DB
         return json_encode($villes, JSON_UNESCAPED_UNICODE);
     }
 
-    public function loadSuperficie($zip)
+    public function loadSurface($zip)
     {
         $req = $this->getDatabase()->prepare("SELECT * FROM villes_france WHERE code_postal LIKE ?");
         $req->execute([$zip . "%"]);
@@ -59,7 +58,7 @@ class API extends DB
         return json_encode($villes, JSON_UNESCAPED_UNICODE);
     }
 
-    public function loadUVille($zip)
+    public function load_updated_town($zip)
     {
         $req = $this->getDatabase()->prepare("SELECT * FROM villes_france WHERE code_postal LIKE ?");
         $req->execute(array($zip . "%"));
@@ -68,7 +67,7 @@ class API extends DB
         return json_encode($villes, JSON_UNESCAPED_UNICODE);
     }
 
-    public function UpdateVille($id)
+    public function update_town($id)
     {
         $id = $_POST['id'];
         $departement = $_POST['departement'];
@@ -78,12 +77,9 @@ class API extends DB
         $population = $_POST['population'];
         $densite = $_POST['densite'];
         $surface = $_POST['surface'];
-
-        // Construction de la requete SQL pour l'update
         $sql = "UPDATE villes_france SET departement=:departement,nom= :nom,code_postal= :code_postal,canton= :canton,population= :population,densite= :densite,surface= :surface WHERE id= :id";
 
         $req = $this->getDatabase()->prepare($sql);
-        // echo $req;
         $req->execute([
             ':departement' => $departement,
             ':nom' => $nom,
@@ -94,7 +90,6 @@ class API extends DB
             ':surface' => $surface,
             ':id' => $id,
         ]);
-
         if ($req) {
             $response = [
                 'status' => 1,
