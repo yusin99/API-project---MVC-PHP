@@ -13,7 +13,7 @@ if (isset($_POST['modifier'])) {
     $surface = htmlspecialchars($_POST['surface']);
     $population = htmlspecialchars($_POST['population']);
     $canton = htmlspecialchars($_POST['canton']);
-    $url = 'http://localhost/apiPHP/apiv2/api/ville/' . $code_postal . '/update' . '/' . $id;
+    $url = URL_API . '/ville/' . $code_postal . '/update' . '/' . $id;
     $data_array = [
         'id' => $id,
         'departement' => $departement,
@@ -25,7 +25,7 @@ if (isset($_POST['modifier'])) {
         'surface' => $surface,
     ];
     $manager = new VillesManager();
-    $manager->curlCall($url,$data_array);
+    $manager->curlCall($url, $data_array);
 }
 ?>
 

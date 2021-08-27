@@ -81,25 +81,25 @@ class API extends DB
 
         $req = $this->getDatabase()->prepare($sql);
         $req->execute([
-            ':departement' => $departement,
-            ':nom' => $nom,
             ':code_postal' => $code_postal,
-            ':canton' => $canton,
             ':population' => $population,
-            ':densite' => $densite,
-            ':surface' => $surface,
             ':id' => $id,
+            ':canton' => $canton,
+            ':surface' => $surface,
+            ':nom' => $nom,
+            ':departement' => $departement,
+            ':densite' => $densite,
         ]);
-        if ($req) {
+        if (!$req) {
             $response = [
-                'status' => 1,
-                'status_message' => 'Ville mise a jour avec succes',
+                'status' => 0,
+                'message' => 'Failed:=> ' . $nom,
+                'error' => mysqli_error($req),
             ];
         } else {
             $response = [
-                'status' => 0,
-                'status_message' => 'Echec de la mise a jour de ' . $nom,
-                'error' => mysqli_error($req),
+                'status' => 1,
+                'message' => 'Successfully updated',
             ];
         }
         header('Content-Type: application/json');

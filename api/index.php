@@ -36,14 +36,14 @@ try {
     if ($_GET['action']) {
         $url = explode('/', filter_var($_GET['action'], FILTER_SANITIZE_URL));
         switch ($url[0]) {
-            case 'ville':
+            case 'town':
                 if (!empty($url[1])) {
                     if (!empty($url[2]) && strtolower($url[2]) === 'update') {
                         $controller = new API();
                         $controller->loadTown($url[1]);
                         if (!empty($url[3])) {
                             $controller = new API();
-                            $controller->update_ville($url[3]);
+                            $controller->update_town($url[3]);
                         }
                     } else {
                         $controller = new API();
@@ -54,7 +54,7 @@ try {
                 }
                 break;
 
-            case 'villes':
+            case 'towns':
                 if (!empty($url[1])) {
 
                     if (!empty($url[2])) {
@@ -70,7 +70,7 @@ try {
                 }
                 break;
 
-            case 'superficie':
+            case 'surface':
                 if (!empty($url[1])) {
                     $controller = new API();
                     echo $controller->loadSurface($url[1]);
@@ -81,12 +81,12 @@ try {
 
             case 'population':
                 if (!empty($url[1])) {
-                        $controller = new API();
-                        echo $controller->loadPopulation($url[1]);
+                    $controller = new API();
+                    echo $controller->loadPopulation($url[1]);
                 } else {
-                        throw new Exception('Please indicate below your postal code or /update!');
+                    throw new Exception('Please indicate below your postal code or /update!');
                 }
-                    break;
+                break;
         }
     } else {
         echo 'Wrong data. Please enter the correct data!';

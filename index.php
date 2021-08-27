@@ -7,6 +7,7 @@ define("PDO", 1); // connexion par PDO
 define("MEDOO", 0); // Connexion par Medoo
 // Choix du mode de connexion
 define("DB_MANAGER", PDO); // PDO ou MEDOO
+define("URL_API", 'http://localhost/apiTerence/api');
 // Création de deux constantes URL et FULL_URL qui pourront servir dans les controlleurs et/ou vues
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") .
     "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
@@ -107,10 +108,10 @@ try
                     break;
                 }
             case "superficie":
-                    $code_postal = $url[1];
-                    $controller = new VillesController();
-                    $controller->display_surface($code_postal);
-                    break;
+                $code_postal = $url[1];
+                $controller = new VillesController();
+                $controller->display_surface($code_postal);
+                break;
             case "ville":
             case "town":
                 if (empty($url[2])) {
@@ -128,7 +129,7 @@ try
                 $controller = new VillesController();
                 $controller->display_population($code_postal);
                 break;
-            
+
             default:
                 throw new Exception("La page n'existe pas");
         }
