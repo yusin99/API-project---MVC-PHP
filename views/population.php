@@ -31,7 +31,7 @@
                             <?php
                         foreach ($town as $town)
                         { ?>
-                            <p>La population de <?=$town->nom ?> est de <?=$town->population ?> personnes.</p>
+
                             <tr>
                                 <td><?= $town->departement?></td>
                                 <td><?= $town->nom ?></td>

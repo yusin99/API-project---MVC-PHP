@@ -23,7 +23,6 @@
                                 <th>Nom</th>
                                 <th>Canton</th>
                                 <th>Population</th>
-                                <!-- <th>Password</th> -->
                                 <th>Densite</th>
                                 <th>Surface</th>
                             </tr>
@@ -32,7 +31,6 @@
                             <?php
                         foreach ($town as $town)
                         { ?>
-                            <p>La superficie de <?=$town->nom ?> est de <?=$town->surface ?></p>
                             <tr>
                                 <td><?= $town->departement?></td>
                                 <td><?= $town->nom ?></td>

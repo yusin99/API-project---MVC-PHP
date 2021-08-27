@@ -4,14 +4,32 @@ require_once "Ville.class.php";
 
 class VillesManager extends DB
 {
-    private $villes;
-    public function addVille($ville)
+    private $towns;
+    public function addTown($towns)
     {
-        $this->villes[$ville->getId()] = $ville;
+        $this->towns[$town->getId()] = $town;
+    }
+
+    public function load_updated_town($code_postal)
+    {
+        $towns = json_decode(file_get_contents('http://localhost/apiPHP/apiv2/api/ville/' . $code_postal));
+        return $towns;
+    }
+    public function curlCall($url,$data_array){    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data_array));
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch, CURLOPT_POST,true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+    $response = curl_exec($ch);
+    if(!$response){
+        return false;
+    }
+    header('Refresh:1');
     }
     public function getAllTowns()
     {
-        return $this->villes;
+        return $this->towns;
     }
     public function loadAllTowns()
     {
@@ -38,21 +56,5 @@ class VillesManager extends DB
         $townsCanton = json_decode(file_get_contents('http://localhost/apiPHP/apiv2/api/villes/' . $code_dep . "/" . $canton));
         return $townsCanton;
     }
-    public function load_updated_town($code_postal)
-    {
-        $towns = json_decode(file_get_contents('http://localhost/apiPHP/apiv2/api/ville/' . $code_postal));
-        return $towns;
-    }
-    public function curlCall($url,$data_array){    
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data_array));
-    curl_setopt($ch,CURLOPT_URL,$url);
-    curl_setopt($ch, CURLOPT_POST,true);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-    $response = curl_exec($ch);
-    if(!$response){
-        return false;
-    }
-    header('Refresh:1');
-    }
+
 }

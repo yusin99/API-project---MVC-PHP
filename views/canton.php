@@ -30,9 +30,7 @@
                         </thead>
                         <tbody>
                             <?php
-                        // $users est défini dans le controlleur, on peut l'utiliser dans la vue
-                        // print_r($villes);
-                        foreach ($ville as $ville)
+                        foreach ($town as $ville)
                         //    echo $ville->surface;
                         { ?>
                             <tr>
