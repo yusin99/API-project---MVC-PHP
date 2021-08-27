@@ -58,9 +58,9 @@ foreach ($town_update as $town) {
                     <label for="">Population</label>
                     <input type="text" name='population' value='<?=$town->population?>'>
                     <label for="">Densite</label>
-                    <input type="number" name='densite' value='<?=$town->densite?>'>
+                    <input type="text" name='densite' value='<?=$town->densite?>'>
                     <label for="">Surface</label>
-                    <input type="number" name='surface' value='<?=$town->surface?>'>
+                    <input type="text" name='surface' value='<?=$town->surface?>'>
                     <input type="submit" name='modifier' value="Modifier">
                 </form>
                 <?php }?>
